@@ -1,0 +1,15 @@
+
+{% extends 'layout.html' %}
+
+{% block title %}My Flask App{% endblock %}
+
+{% block content %}
+    {% include 'header.html' %}
+    <!-- <div class="image-container"> -->
+        <h5>{{ name }}</h5>
+        <h5>{{ cost }}</h5>
+        <img src="{{ image_url }}" width="100" height="100" alt="User Image">
+        <h5>{{ descript }}</h5>
+        
+    <!-- </div> -->
+{% endblock %}
