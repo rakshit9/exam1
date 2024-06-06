@@ -5,10 +5,14 @@ import os
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static'
-app.config['IMAGE_FOLDER'] = 'static'
+app.config['UPLOAD_FOLDER'] = './static/'
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'sinong.jpg')
+    return render_template("index.html", user_image = full_filename)
+
 if __name__ == '__main__':
     app.run(debug=True)
+
