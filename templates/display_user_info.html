@@ -6,11 +6,36 @@
 {% block content %}
 <img src="{{ user_image }}" alt="User Image">
     {% include 'header.html' %}
-    <!-- <div class="image-container"> -->
-        <h5>{{ name }}</h5>
-        <h5>{{ cost }}</h5>
-        <img src="{{ image_url }}" width="100" height="100" alt="User Image">
-        <h5>{{ descript }}</h5>
-        
+
+    <h1>User Details</h1>
+    {% if error %}
+        <h3>{{ error }}</h3>
+    {% else %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>cost</th>
+                <th>pic</th>
+                <th>descript</th>
+            </tr>
+            {% for student in students %}
+                <tr>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.cost }}</td>
+                    <td>
+                        {% if student.pic %}
+                            <img src="{{ student.pic }}" alt="{{ student.name }}" width="100">
+                        {% else %}
+                            <p>No picture available</p>
+                        {% endif %}
+                    </td>
+                    <td>{{ student.descript }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+
+
     <!-- </div> -->
 {% endblock %}

@@ -39,6 +39,44 @@ def search():
             return render_template('error.html', message="No such name found.")
     return render_template('search_user.html',user_image = full_filename)
 
+
+
+
+@app.route('/display_user_range_info', methods=['GET', 'POST'])
+def get_display_user_info():
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'sinong.jpg')
+    if request.method == 'POST':
+        range1 = int(request.form.get('range1') or 0)
+        range2 = int(request.form.get('range2') or 0)
+        id_range1 = int(request.form.get('id_range1') or 0)
+        id_range2 = int(request.form.get('id_range2') or 0)
+       
+        students = []
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # gets the directory of the current file
+        file_path = os.path.join(BASE_DIR, 'static', 'q1x.csv')  # constructs the path to the csv file
+        with open(file_path) as file:
+            csv_reader = csv.DictReader(file)
+            for r in csv_reader:
+                grade_check = r['cost'].strip().isdigit() and range1 <= int(r['cost']) <= range2 if range1 or range2 else True
+                if grade_check:
+    # name,cost,pic,descript
+                    student = dict()
+                    student['name'] = r['name']
+                    student['cost'] = r['cost']
+                    student['descript'] = r['descript']
+                    if r['pic'].strip():
+                        student['pic'] = 'static/' + r['pic']
+                    else:
+                        student['pic'] = 'static/no_picture.png'
+                    students.append(student)
+        if students:
+            return render_template('display_user_info.html', students=students, user_image = full_filename)
+        else:
+            return render_template('display_user_info.html', error="No students found in this grade range", user_image = full_filename)
+    return render_template('search_range.html',user_image = full_filename)
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 

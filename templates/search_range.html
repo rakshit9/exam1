@@ -1,0 +1,19 @@
+
+
+{% extends 'layout.html' %}
+
+{% block title %}My Flask App{% endblock %}
+
+{% block content %}
+{% include 'header.html' %}
+
+<div class="form-container">
+
+<h5>Search for a Person image</h5>
+    <form action="/display_user_range_info" method="post">
+        Enter Grade Range 1: <input type="text" name="range1"/><br/><br/>
+        Enter Grade Range 2: <input type="text" name="range2"/><br/><br/>
+        <input type="submit" value="Submit"/>
+    </form>
+ </div>
+{% endblock %}
