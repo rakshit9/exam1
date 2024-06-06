@@ -1,0 +1,24 @@
+
+{% extends 'layout.html' %}
+
+{% block title %}My Flask App{% endblock %}
+
+{% block content %}
+    {% include 'header.html' %}
+
+    <div class="form-container">
+        <h5>Update Multiple Fields for an Entry</h5>
+        <form action="/update_entry" method="post">
+       
+            Enter name 1: <input type="text" name="name"/><br/><br/>
+            Enter descript 2: <input type="text" name="descript"/><br/><br/>
+            <input type="submit" value="Submit"/>   
+        </form>
+        </div>
+           
+     
+    </div>
+    
+       
+
+{% endblock %}
