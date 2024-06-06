@@ -37,7 +37,7 @@ def search():
                     
                     return render_template('error.html', message="Image file is missing.")
             return render_template('error.html', message="No such name found.")
-    return render_template('search_user.html')
+    return render_template('search_user.html',user_image = full_filename)
 
 if __name__ == '__main__':
     app.run(debug=True)
